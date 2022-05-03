@@ -1,0 +1,21 @@
+version: '3.9'
+services: 
+    tweetapp-prometheusdemo:
+        container_name: tweetapp-prometheusdemo
+        build: 
+            context: "./Prometheus"
+        ports:
+            - 9090:9090
+        networks: 
+            - tweetAppNetworkdemo
+    tweetapp-grafanademo:
+        container_name: tweetapp-grafanademo
+        image: grafana/grafana
+        ports: 
+            - 4000:3000
+        networks: 
+            - tweetAppNetworkdemo
+        depends_on: 
+            - tweetapp-prometheus
+networks: 
+    tweetAppNetworkdemo:
